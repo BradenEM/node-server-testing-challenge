@@ -31,6 +31,12 @@ describe('MVP Tests', () => {
       const test = await db('test');
       expect(test).toHaveLength(2);
     });
+
+    it('should return status 201', async () => {
+      const test = await request(server).post('/name').send({name:'test'});
+
+      expect(test.status).toBe(201);
+    });
   });
 
   describe('DELETE /name/:id', () => {
@@ -46,5 +52,12 @@ describe('MVP Tests', () => {
       const test = await db('test');
       expect(test).toHaveLength(1);
     });
+
+	it('should return status 204', async () => {
+		await Database.insert({name: 'test'});
+		const test = await request(server).delete('/name/:id').send({name: 'test', id: '1'});
+
+		expect(test.status).toBe(204);
+	})
   });
 });

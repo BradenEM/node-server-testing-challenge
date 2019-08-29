@@ -20,4 +20,15 @@ server.post('/name', async (req, res) => {
   }
 });
 
+server.delete('/name/:id', async (req, res) => {
+  const { id } = req.params;
+  const name = await Database.remove(id);
+
+  try {
+    res.status(204).json({ message: 'name removed' });
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
+
 module.exports = server;
