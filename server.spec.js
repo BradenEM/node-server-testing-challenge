@@ -1,6 +1,7 @@
 const request = require('supertest');
 const server = require('./server');
 const db = require('./database/dbConfig');
+const Database = require('./serverHelper');
 
 describe('GET /', () => {
   it('should return 200 OK', async () => {
